@@ -13,6 +13,7 @@
             <property name="closedKo" label="Closed KO step" required="true" type="String" description="Picklist value that represents a closed not ok step. When selected will render a red progress bar." />
             <property name="lastStepLabel" label="Label of last step" required="true" type="String" description="Label to give to the last step when user has to select one between Closed OK and Closed KO step." />
             <property name="hideUpdateButton" label="Hide update button" type="Boolean" />
+            <property name="hiddenStages" label="Stages to hide?" description="Insert the API Names of the picklist values you which to hide seperated by a comma" type="String" />
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>
