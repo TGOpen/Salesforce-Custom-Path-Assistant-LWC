@@ -43,7 +43,7 @@ import {
     Step,
     getMasterRecordTypeId,
     getRecordTypeId
-} from './utils';
+  } from './utils';
 
 // value to assign to the last step when user has to select a proper closed step
 const OPEN_MODAL_TO_SELECT_CLOSED_STEP = 'pathAssistant_selectAClosedStepValue';
@@ -57,6 +57,8 @@ export default class PathAssistant extends LightningElement {
 
     // picklist field's API name used to render the path assistant
     @api picklistField;
+
+    @api hiddenStages;
 
     // closed OK step value. When selected will render a green progress bar
     @api closedOk;
@@ -194,9 +196,10 @@ export default class PathAssistant extends LightningElement {
         if (data) {
             if (data.picklistFieldValues[this.picklistField]) {
                 // stores possible steps
+           
                 this.possibleSteps = data.picklistFieldValues[
                     this.picklistField
-                ].values.map((elem, idx) => {
+                ].values.filter((elem)=> !this.hiddenStages.includes(elem.value)).map((elem, idx) => {
                     return new Step(elem.value, elem.label, idx);
                 });
 
@@ -548,7 +551,7 @@ export default class PathAssistant extends LightningElement {
                 break;
         }
     }
-
+  
     /**
      * Called when user press Save button inside the modal
      */
@@ -561,3 +564,4 @@ export default class PathAssistant extends LightningElement {
         this.openModal = false;
     }
 }
+   
